@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} Deposit {% endblock %}
+{% block extracss%}
+<link rel="stylesheet" href="../static/css/dashboard.css">
+{% endblock %}
+
+{% block content %}
+<nav>
+    <a href="/dashboard/{{username}}">Home</a>
+    <a href="/logout">Logout</a>
+</nav>
+
+<h1>Deposit Money</h1>
+
+<form method="post">
+    <label for="amount">Enter the amount to deposit (₹): </label>
+    <input type="number" name="amount" placeholder="e.g. 5000" min="1" step="1" required autofocus>
+
+    <input type="submit" value="Deposit">
+</form>
+
+{% if info %}
+<h3>{{info}}</h3>
+{% endif %}
+
+{% endblock %}

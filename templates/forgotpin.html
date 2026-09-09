@@ -1,0 +1,41 @@
+ {% extends 'base.html' %}
+
+{% block title %} Forgot Pin {% endblock %}
+{% block extracss%}
+<link rel="stylesheet" href="../static/css/dashboard.css">
+{% endblock %}
+
+
+{% block content %}
+<h1>Forgot pin</h1>
+
+    <form method="post">
+    <label for="email">Enter the email: </label>
+    <input type="email" name="email">
+
+    <input type="submit" value="Reset">
+
+
+
+
+
+    </form>
+
+    <h3>{{info}}</h3>
+
+    
+{% endblock %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot pin</title>
+</head>
+<body>
+    
+</body>
+</html>

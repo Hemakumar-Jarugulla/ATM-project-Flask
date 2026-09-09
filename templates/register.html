@@ -1,0 +1,47 @@
+ {% extends 'base.html' %}
+
+{% block title %} Register {% endblock %}
+{% block extracss%}
+<link rel="stylesheet" href="../static/css/dashboard.css">
+{% endblock %}
+
+
+{% block content %}
+
+     <h1>Register to the ATM</h1>
+    <form method="post">
+    <label for='username'>username:</label>
+    <input type='text' name='username'>
+    <br>
+    <label for='email'>Enter the email</label>
+    <input type='email' name='email'>
+    <br>
+    <label for='pin'>Enter the pin:</label>
+    <input type='pin' name='pin'>
+    <br>
+
+    <input type="submit" value="Register">
+    </form>
+    <p>Already Have an account<a href="/login">Login</a></p>
+
+{% endblock %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+   
+   
+</body>
+</html>
+
+
+
+
+

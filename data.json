@@ -1,0 +1,101 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "hemakumar",
+            "email": "Hemanth@gmail.com",
+            "pin": "234567",
+            "history": [
+                "10000 deposited",
+                "10000 deposited",
+                "5000 withdraw",
+                "10000 deposited",
+                "5000 withdraw",
+                "10000 deposited",
+                "142546 deposited",
+                "10000 deposited",
+                "5000 withdraw",
+                "10000 withdraw",
+                "10000 withdraw",
+                "10000 withdraw",
+                "5000 deposited",
+                "5000 deposited",
+                "5000 deposited",
+                "10000 withdraw",
+                "5000 deposited",
+                "100000 withdraw",
+                "10000 deposited",
+                "1000000 withdraw",
+                "100000 deposited"
+            ],
+            "balance": 49167546
+        },
+        {
+            "id": 2,
+            "username": "sekhar",
+            "email": "sekhar@gmail.com",
+            "pin": "456789",
+            "history": [],
+            "balance": 0
+        },
+        {
+            "id": 3,
+            "username": "hemanth",
+            "email": "jarugullahemakumar@gmail.com",
+            "pin": "123456",
+            "history": [],
+            "balance": 0
+        },
+        {
+            "id": 4,
+            "username": "Narasinga",
+            "email": "Narasinga@gmail.com",
+            "pin": "567890",
+            "history": [],
+            "balance": 0
+        },
+        {
+            "id": 5,
+            "username": "rajesh",
+            "email": "rajesh@gmail.com",
+            "pin": "567890",
+            "history": [],
+            "balance": 0
+        },
+        {
+            "id": 6,
+            "username": "sathish1",
+            "email": "sathish@gmail.com",
+            "pin": "123456",
+            "history": [],
+            "balance": 3000000
+        },
+        {
+            "id": 7,
+            "username": "rakesh",
+            "email": "rakesh@gmail.com",
+            "pin": "098765",
+            "history": [
+                "100000 deposited",
+                "10000 withdraw"
+            ],
+            "balance": 90000
+        },
+        {
+            "id": 8,
+            "username": "Sekhar",
+            "email": "Sekhar@gmail.com",
+            "pin": "@Sekhar1",
+            "history": [],
+            "balance": 0
+        },
+        {
+            "id": 9,
+            "username": "Rakesh",
+            "email": "Rakesh@gmail.com",
+            "pin": "@Rakesh1",
+            "history": [],
+            "balance": 0
+        }
+    ]
+}

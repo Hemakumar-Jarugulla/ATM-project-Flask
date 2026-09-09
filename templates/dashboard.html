@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %} ATM Dashboard {% endblock %}
+{% block extracss%}
+<link rel="stylesheet" href="../static/css/dashboard.css">
+{% endblock %}
+
+{% block content %}
+<nav>
+    <div class="nav-brand">🏧 ATM PREMIER</div>
+    <div class="nav-links">
+        <a href="/dashboard/{{username}}">Home</a>
+        <a href="/logout">Logout</a>
+    </div>
+</nav>
+
+<div class="dashboard-header">
+    <h1>welcome to the ATM</h1>
+    <h3>Hello {{username}},</h3>
+</div>
+
+<div class="card-container">
+    <!-- Realistic 3D Virtual ATM Debit Card -->
+    <div class="atm-card">
+        <div class="atm-card-top">
+            <span class="atm-card-bank">ATM PREMIER BANK</span>
+            <span class="atm-card-contactless">📶</span>
+        </div>
+        <div class="atm-card-chip"></div>
+        <div class="atm-card-number">•••• •••• •••• 8826</div>
+        <div class="atm-card-bottom">
+            <div class="atm-card-holder">
+                <span class="atm-card-label">CARD HOLDER</span>
+                <span class="atm-card-name">{{username|upper}}</span>
+            </div>
+            <div class="atm-card-expiry">
+                <span class="atm-card-label">EXPIRES</span>
+                <span class="atm-card-date">12/30</span>
+            </div>
+            <div class="atm-card-type">
+                <span>PLATINUM</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="actions-grid">
+    <a href="/checkBalance" class="action-card card-balance">
+        <span class="card-icon">💳</span>
+        <span class="card-title">Check Balance</span>
+        <span class="card-desc">Verify PIN & view real-time account balance</span>
+    </a>
+    <a href="/deposit" class="action-card card-deposit">
+        <span class="card-icon">💰</span>
+        <span class="card-title">Deposit</span>
+        <span class="card-desc">Instant fund deposit to your ATM account</span>
+    </a>
+    <a href="/withdraw" class="action-card card-withdraw">
+        <span class="card-icon">💸</span>
+        <span class="card-title">Withdraw</span>
+        <span class="card-desc">Quick cash withdrawal from your balance</span>
+    </a>
+    <a href="/viewTransactions" class="action-card card-transactions">
+        <span class="card-icon">📜</span>
+        <span class="card-title">View Transactions</span>
+        <span class="card-desc">Transaction passbook & CSV statement download</span>
+    </a>
+</div>
+
+<div class="security-stats-bar">
+    <div class="stat-item">
+        <span class="stat-icon">🛡️</span>
+        <span class="stat-text">Bank-Grade Encryption</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-icon">⚡</span>
+        <span class="stat-text">Instant ATM Processing</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-icon">🕒</span>
+        <span class="stat-text">24/7 Service Available</span>
+    </div>
+</div>
+
+{% endblock %}

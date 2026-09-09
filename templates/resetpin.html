@@ -1,0 +1,39 @@
+ {% extends 'base.html' %}
+
+{% block title %} Reset Pin {% endblock %}
+{% block extracss%}
+<link rel="stylesheet" href="../static/css/dashboard.css">
+{% endblock %}
+
+
+{% block content %}
+
+     <h1>Reset Pin</h1>
+    <form method="post">
+        <label for="npin">Enter the new pin:</label>
+        <input type="password" name="npin">
+
+        <label for="cpin">Confirm the new pin:</label>
+        <input type="password" name="cpin">
+
+        <input type="submit" value="update">
+    </form>
+
+ <h3>{{info}}</h3>
+
+{% endblock %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Pin</title>
+</head>
+<body>
+   
+
+</body>
+</html>

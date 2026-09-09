@@ -1,0 +1,41 @@
+ {% extends 'base.html' %}
+
+{% block title %} OTP Verification {% endblock %}
+{% block extracss%}
+<link rel="stylesheet" href="../static/css/dashboard.css">
+{% endblock %}
+
+
+{% block content %}
+<h1>OTP Verification</h1>
+    <form method="POST">
+        <label for="otp">Enter the otp:</label>
+        <input type="number" name="otp" inputmode="numeric" min="100000" max="999999" required>
+
+        <input type="submit" value='verify'>
+
+
+    </form>
+
+
+
+
+    <h3>{{info}}</h3>
+   
+{% endblock %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+
+
+</body>
+</html>
+

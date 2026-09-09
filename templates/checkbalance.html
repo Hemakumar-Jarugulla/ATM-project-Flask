@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Check Balance {% endblock %}
+{% block extracss%}
+<link rel="stylesheet" href="../static/css/dashboard.css">
+{% endblock %}
+
+{% block content %}
+<nav>
+    <a href="/dashboard/{{username}}">Home</a>
+    <a href="/logout">Logout</a>
+</nav>
+
+<h1>Check Balance</h1>
+
+{% if verified %}
+<div class="balance-card">
+    <div class="balance-badge">🔒 Security Verified</div>
+    <div class="balance-label">Available Account Balance</div>
+    <div class="balance-amount">₹ {{ "{:,.2f}".format(balance) if balance is number else balance }}</div>
+    <div class="balance-holder">Account Holder: <strong>{{username}}</strong></div>
+    <div class="balance-actions">
+        <a href="/withdraw" class="btn-action btn-withdraw">Withdraw Cash</a>
+        <a href="/deposit" class="btn-action btn-deposit">Deposit Cash</a>
+    </div>
+</div>
+{% else %}
+<form method="post">
+  
+    <label for="pin">Enter your 6-Digit ATM PIN: </label>
+    <input type="password" name="pin" placeholder="Enter PIN (e.g. {{pin_hint}})" maxlength="6" required autofocus>
+    <input type="submit" value="Check Balance">
+</form>
+{% endif %}
+
+{% if info %}
+<h3>{{info}}</h3>
+{% endif %}
+
+{% endblock %}

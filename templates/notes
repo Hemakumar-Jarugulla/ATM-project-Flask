@@ -1,0 +1,775 @@
+
+Your first line is:
+
+from flask import Flask, redirect, url_for, render_template, request, session
+
+You are importing different tools from Flask.
+
+Flask
+Flask
+
+Used to create your web application.
+
+Example:
+
+app = Flask(__name__)
+
+Think of app as your entire website/application.
+
+redirect
+redirect()
+
+Used to send the user from one page to another.
+
+Example:
+
+return redirect('login')
+
+This means:
+
+"Go to the login page."
+
+url_for
+url_for()
+
+Used to generate a URL based on a Flask function.
+
+Example:
+
+url_for('dashboard', user=session['username'])
+
+This finds the URL belonging to the dashboard() function.
+
+render_template
+render_template()
+
+Used to display an HTML file.
+
+For example:
+
+return render_template('login.html')
+
+Flask looks for:
+
+templates/
+    login.html
+
+and displays it.
+
+request
+request
+
+Used to receive information sent by the user.
+
+For example, if your HTML has:
+
+<input name="email">
+
+You can get the value using:
+
+email = request.form.get('email')
+session
+session
+
+Used to temporarily remember information about a user between different requests/pages.
+
+For example:
+
+session['username'] = 'John'
+
+Later you can retrieve it:
+
+session['username']
+3. Importing JSON
+import json
+
+Python's json module allows you to work with JSON files.
+
+Your project uses:
+
+data.json
+
+as a simple data storage system.
+
+For example:
+
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "John",
+            "email": "john@gmail.com",
+            "pin": "1234",
+            "history": [],
+            "balance": 0
+        }
+    ]
+}
+4. Importing your email function
+from mail import send_email
+
+This means you have another Python file called:
+
+mail.py
+
+Inside that file there is probably a function:
+
+send_email()
+
+Your Flask application uses it to send the OTP to the user's email.
+
+5. Importing random
+import random
+
+This is used to generate a random OTP.
+
+For example:
+
+583921
+6. Creating the Flask application
+app = Flask(__name__)
+
+This creates your Flask application.
+
+You can think of it like:
+
+Flask
+  ↓
+Creates your web application
+  ↓
+app
+7. Secret key
+app.secret_key = 'atm55'
+
+Flask needs a secret key when you use things like session.
+
+For example:
+
+session['username'] = username
+
+The secret key helps Flask securely handle session data.
+
+Important
+
+For a real project, don't use:
+
+app.secret_key = 'atm55'
+
+Use a strong secret value and keep it in an environment variable.
+
+8. Creating the OTP function
+def generate_otp():
+    return str(random.randint(100000,999999))
+
+Let's break it down.
+
+def
+
+def is used to create a function.
+
+def generate_otp():
+
+Function name:
+
+generate_otp
+
+Its job is to generate an OTP.
+
+random.randint()
+random.randint(100000,999999)
+
+Generates a random number between:
+
+100000
+
+and
+
+999999
+
+Example:
+
+583214
+str()
+str(...)
+
+converts the number into a string.
+
+So:
+
+583214
+
+becomes:
+
+"583214"
+
+This is useful because form values received from HTML are generally strings.
+
+9. Reading data from JSON
+
+You created:
+
+def get_data():
+    with open('data.json','r') as file:
+        data=json.load(file)
+        return data
+
+This function reads your JSON file.
+
+open()
+open('data.json', 'r')
+
+means:
+
+Open data.json in read mode.
+
+r means read.
+
+with
+with open(...) as file:
+
+Python automatically handles closing the file after you're finished.
+
+json.load()
+data = json.load(file)
+
+Converts JSON data into Python data.
+
+For example:
+
+{
+    "name": "John"
+}
+
+becomes a Python dictionary:
+
+{
+    "name": "John"
+}
+10. Updating the JSON file
+def update_data(data):
+    with open('data.json','w') as file:
+        json.dump(data,file,indent=4)
+
+This function saves updated data back into data.json.
+
+Here:
+
+'w'
+
+means write mode.
+
+And:
+
+json.dump()
+
+converts Python data back into JSON.
+
+11. Home page
+@app.route('/')
+def base():
+    return redirect('login')
+
+This is one of the most important Flask concepts.
+
+What is @app.route()?
+
+It tells Flask:
+
+"When the user visits this URL, execute this function."
+
+So:
+
+@app.route('/')
+
+means the home URL.
+
+When someone visits:
+
+http://127.0.0.1:5000/
+
+Flask executes:
+
+base()
+
+Then:
+
+return redirect('login')
+
+sends the user to:
+
+/login
+12. Login page
+@app.route('/login', methods=['GET','POST'])
+def login():
+
+This creates the login page.
+
+There are two possible HTTP methods:
+
+GET
+POST
+GET
+
+Used when the user simply opens the page.
+
+Example:
+
+/login
+POST
+
+Used when the user submits the login form.
+
+Checking the request
+if request.method == 'POST':
+
+This means:
+
+Did the user submit the form?
+
+If yes, execute the code inside.
+
+13. Getting email and PIN
+email = request.form.get('email')
+pin = request.form.get('pin')
+
+Suppose your HTML contains:
+
+<input name="email">
+<input name="pin">
+
+The user enters:
+
+Email: john@gmail.com
+PIN: 1234
+
+Then Python gets:
+
+email = "john@gmail.com"
+pin = "1234"
+14. Getting users
+data = get_data()
+users = data["users"]
+
+First:
+
+get_data()
+
+reads your JSON file.
+
+Then:
+
+data["users"]
+
+gets the list of users.
+
+For example:
+
+users = [
+    {
+        "id": 1,
+        "username": "John",
+        "email": "john@gmail.com",
+        "pin": "1234"
+    }
+]
+15. Checking login
+for i in users:
+
+This loops through every user.
+
+Imagine:
+
+User 1
+User 2
+User 3
+User 4
+
+Python checks each one.
+
+Then:
+
+if i["email"] == email and i["pin"] == pin:
+
+It checks:
+
+Entered email == stored email
+AND
+Entered PIN == stored PIN
+
+For example:
+
+Entered:
+john@gmail.com
+1234
+
+Stored:
+john@gmail.com
+1234
+
+Both match → login successful.
+
+16. Creating a session
+session['username'] = i["username"]
+
+Suppose:
+
+i["username"] = "John"
+
+Then Flask stores:
+
+session['username'] = "John"
+
+Now Flask remembers that the logged-in user is John.
+
+17. Redirecting to dashboard
+return redirect(
+    url_for('dashboard', user=session['username'])
+)
+
+This sends the user to the dashboard.
+
+Because your route is:
+
+@app.route('/dashboard/<user>')
+
+If the username is John, the URL becomes something like:
+
+/dashboard/John
+18. Invalid login
+
+If the loop doesn't find a matching user:
+
+else:
+    return render_template('login.html', info="Invalid login")
+
+The login page is displayed again.
+
+It sends:
+
+info = "Invalid login"
+
+Your HTML can display this message.
+
+19. Registration
+@app.route('/register', methods=['GET','POST'])
+def register():
+
+This creates the registration page.
+
+When the user submits the form:
+
+username = request.form.get('username')
+email = request.form.get('email')
+pin = request.form.get('pin')
+
+You get the user's:
+
+Username
+Email
+PIN
+20. Checking whether email already exists
+for i in users:
+    if i["email"] == email:
+        return render_template(
+            "register.html",
+            info="Email is already registered"
+        )
+
+The program checks every existing user.
+
+If the email already exists:
+
+john@gmail.com
+
+the registration is rejected.
+
+This prevents duplicate accounts.
+
+21. Creating a new user
+details = {
+    "id": len(users)+1,
+    "username": username,
+    "email": email,
+    "pin": pin,
+    "history": [],
+    "balance": 0
+}
+
+This creates a Python dictionary.
+
+Example:
+
+{
+    "id": 2,
+    "username": "David",
+    "email": "david@gmail.com",
+    "pin": "5678",
+    "history": [],
+    "balance": 0
+}
+
+Then:
+
+users.append(details)
+
+adds the new user to the list.
+
+And:
+
+update_data(data)
+
+saves it to data.json.
+
+Finally:
+
+return redirect('login')
+
+takes the user to the login page.
+
+22. Forgot PIN
+@app.route('/forgotpin', methods=['GET','POST'])
+def forgotpin():
+
+This handles forgotten PINs.
+
+The user enters their email:
+
+email = request.form.get('email')
+
+Then the application searches for that email:
+
+for i in users:
+    if email == i["email"]:
+
+If found:
+
+username = i["username"]
+
+gets the username.
+
+23. Generate OTP
+otp = generate_otp()
+
+Suppose it generates:
+
+472819
+
+Then:
+
+send_email(email, username, otp)
+
+sends that OTP to the user's email.
+
+24. Store OTP in session
+session["otp"] = otp
+session["email"] = email
+
+Now Flask remembers:
+
+OTP → 472819
+Email → user@gmail.com
+
+Then:
+
+return redirect('verify')
+
+takes the user to the OTP verification page.
+
+25. OTP verification
+@app.route('/verify', methods=['GET','POST'])
+def verify():
+
+The user enters the OTP.
+
+otp = request.form.get('otp')
+
+Then:
+
+if otp == session["otp"]:
+
+checks:
+
+Entered OTP
+     ↓
+Matches
+     ↓
+Stored OTP?
+
+If yes:
+
+session['otp'] = None
+
+clears the OTP.
+
+Then:
+
+return redirect('resetpin')
+
+takes the user to the reset PIN page.
+
+If the OTP is wrong:
+
+return render_template('verify.html', info="Invalid OTP")
+26. Reset PIN
+@app.route('/resetpin', methods=['GET','POST'])
+def resetpin():
+
+The user enters:
+
+New PIN
+Confirm PIN
+
+Python gets them:
+
+npin = request.form.get('npin')
+cpin = request.form.get('cpin')
+
+Then:
+
+if npin == cpin:
+
+checks whether both PINs are identical.
+
+Example:
+
+New PIN:     1234
+Confirm PIN: 1234
+
+✅ Correct.
+
+But:
+
+New PIN:     1234
+Confirm PIN: 5678
+
+❌ Incorrect.
+
+27. Updating the PIN
+
+If both PINs match:
+
+data = get_data()
+users = data["users"]
+
+The application loads all users.
+
+Then:
+
+for i in users:
+    if i["email"] == session['email']:
+
+It finds the user whose email was stored during the forgot-PIN process.
+
+Then:
+
+i["pin"] = npin
+
+changes the old PIN to the new PIN.
+
+Finally:
+
+update_data(data)
+
+saves the new PIN.
+
+Then:
+
+return redirect('login')
+
+takes the user back to login.
+
+28. Logout
+@app.route('logout')
+def logout():
+    session.clear()
+    return redirect('login')
+
+The purpose is to log the user out.
+
+session.clear()
+
+removes all session information.
+
+Then:
+
+return redirect('login')
+
+takes them to login.
+
+Small correction
+
+You should normally write:
+
+@app.route('/logout')
+
+with / before logout.
+
+29. Dashboard
+@app.route('/dashboard/<user>')
+def dashboard(user):
+    return f"Hello {user}, welcome to the ATM"
+
+<user> is a dynamic URL parameter.
+
+For example:
+
+/dashboard/John
+
+Flask gives:
+
+user = "John"
+
+Then:
+
+f"Hello {user}, welcome to the ATM"
+
+produces:
+
+Hello John, welcome to the ATM
+
+The f before the string allows Python to insert variables into the string.
+
+30. Check balance
+@app.route('/checkBalance')
+def checkBalance():
+    return "your current Balance is 20000/-"
+
+When the user visits:
+
+/checkBalance
+
+the application returns:
+
+your current Balance is 20000/-
+Important problem
+
+Your registration code creates:
+
+"balance": 0
+
+but your check balance function says:
+
+20000
+
+So this function is not actually checking the user's balance.
+
+It is simply returning a hard-coded value.
+
+Later, you can change it to read the logged-in user's actual balance from data.json.
+
+31. Starting the application
+
+At the bottom:
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+This means:
+
+Run the Flask application only when this Python file is executed directly.
+
+Then:
+
+app.run(debug=True)
+
+starts the Flask development server.

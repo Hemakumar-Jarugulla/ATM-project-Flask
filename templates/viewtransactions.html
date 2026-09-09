@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}viewtransactions{% endblock %}
+{% block extracss%}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/viewtransactions.css') }}">
+{% endblock %}
+
+
+{% block content %}
+
+<main class="transactions-page">
+    <div class="transactions-heading">
+        <p class="page-eyebrow">Account activity</p>
+        <h1>Transaction history</h1>
+        <p class="transactions-subtitle">Review your recent deposits and withdrawals.</p>
+    </div>
+
+    {% if history %}
+    <div class="transactions-toolbar">
+        <p class="tx-count"><strong>{{ length }}</strong> transaction{{ 's' if length != 1 else '' }}</p>
+        <a href="{{ url_for('export_transactions_pdf') }}" class="btn-download">
+            <span aria-hidden="true">↓</span>
+            Download transactions
+        </a>
+    </div>
+
+    <div class="transactions-table-wrap">
+    <table class="transactions-table">
+        <thead>
+            <tr>
+                <th scope="col">Transaction ID</th>
+                <th scope="col">Transaction description</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for i in range(length) %}
+        <tr>
+            <td class="transaction-id">#{{ '%03d'|format(i + 1) }}</td>
+            <td class="transaction-description">{{ history[i] }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    {% else %}
+    <section class="empty-state" aria-live="polite">
+        <p class="empty-icon" aria-hidden="true">◎</p>
+        <h2>No transaction history</h2>
+        <p>Your deposits and withdrawals will appear here.</p>
+    </section>
+
+    {% endif %}
+</main>
+
+{% endblock %}
